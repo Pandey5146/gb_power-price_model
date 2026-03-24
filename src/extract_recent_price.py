@@ -8,8 +8,8 @@ raw_folder.mkdir(parents=True, exist_ok=True)
 url = "https://data.elexon.co.uk/bmrs/api/v1/balancing/pricing/market-index"
 
 params = {
-    "from": "2026-03-14T00:00:00Z",
-    "to": "2026-03-15T00:00:00Z"
+    "from": "2026-03-16T00:00:00Z",
+    "to": "2026-03-24T00:00:00Z"
 }
 
 response = requests.get(url, params=params, timeout=60)
