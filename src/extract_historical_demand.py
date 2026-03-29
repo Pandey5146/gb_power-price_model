@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 from pathlib import Path
+from datetime import datetime, timedelta, timezone
 
 raw_folder = Path("data/raw")
 raw_folder.mkdir(parents=True, exist_ok=True)
@@ -8,9 +9,13 @@ raw_folder.mkdir(parents=True, exist_ok=True)
 # Historical Initial National Demand outturn stream
 url = "https://data.elexon.co.uk/bmrs/api/v1/demand/outturn/stream"
 
+now_utc = datetime.now(timezone.utc)
+to_dt = now_utc.replace(hour=0, minute=0, second=0, microsecond=0)
+from_dt = to_dt - timedelta(days=730)
+
 params = {
-    "from": "2024-01-01T00:00:00Z",
-    "to": "2026-01-01T00:00:00Z",
+    "from": from_dt.strftime("%Y-%m-%dT%H:%M:%SZ"),
+    "to": to_dt.strftime("%Y-%m-%dT%H:%M:%SZ"),
     "format": "json"
 }
 
